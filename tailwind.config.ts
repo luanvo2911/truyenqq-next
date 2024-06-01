@@ -12,7 +12,9 @@ const config: Config = {
         'orange': '#F18121',
         'white': '#FFFFFF',
         'darkBlue': '#3F94D5',
-        'normalBlue': '#56CCF2'
+        'normalBlue': '#56CCF2',
+        'black': '#000000',
+        'red': '#FF2853'
       }
     },
   },
