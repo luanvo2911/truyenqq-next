@@ -1,9 +1,11 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Quicksand } from "next/font/google";
 import { SpeedInsights } from "@vercel/speed-insights/next";
+import { Suspense } from "react";
+import Loading from "./loading";
 import "./globals.css";
 
-const inter = Inter({ subsets: ["latin", "vietnamese"] });
+const quicksand = Quicksand({ weight: ["400"], subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Truyenqq Replica",
@@ -17,10 +19,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>
-        {children}
-        <SpeedInsights />
-      </body>
+      <Suspense fallback={<Loading />}>
+        <body className={quicksand.className}>
+          {children}
+          <SpeedInsights />
+        </body>
+      </Suspense>
     </html>
   );
 }

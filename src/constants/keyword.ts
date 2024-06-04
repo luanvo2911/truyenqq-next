@@ -1,0 +1,25 @@
+const tags = [
+  "Truyện tranh",
+  "Truyện Tranh Online",
+  "Truyện Tranh mới",
+  "Truyện tranh hay",
+  "Đọc truyện tranh",
+  "Manhwa",
+  "Manhua",
+  "Manga",
+  "Truyện Ngôn Tình",
+  "nettruyee",
+  "toptruyen",
+  "blogtruyen",
+  "vcomycs",
+  "protruyen",
+  "tusachxinh",
+  "tutientruyen",
+  "xem anime",
+  "animevietsub",
+  "doctruyenchu",
+  "truyenfull",
+  "cuutruyen",
+  "truyện chữ"
+];
+export default tags;

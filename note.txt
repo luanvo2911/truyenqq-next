@@ -1,0 +1,5 @@
+Enhance SEO performance:
+1. Button should have aria-label
+2. Image should have alt prop
+3. Increase contrast ratio between foreground and background
+4. Avoid large layout shift

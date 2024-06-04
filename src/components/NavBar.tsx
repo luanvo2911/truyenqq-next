@@ -10,23 +10,24 @@ import {
   faSearch,
   faLightbulb,
   faBars,
+  faRectangleXmark,
 } from "@fortawesome/free-solid-svg-icons";
 
 export default function NavBar() {
   const isMobile = useIsMobile();
-  const {toggle, setToggle} = useToggle();
+  const { toggle, setToggle } = useToggle();
   return (
-    <div className="w-full min-h-[100px]">
-      <div className="max-w-full flex justify-between items-center mx-2 xl:mx-40 pt-4">
+    <div className="w-screen min-h-[100px]">
+      <div className="max-w-full flex justify-between items-center px-2 xl:px-40 pt-4">
         <div className="flex items-center space-x-4">
-          <button>
+          <a href="/">
             <Image
               src={isMobile ? logoMobile : logoPC}
               width={isMobile ? 30 : 150}
               height={isMobile ? 30 : 150}
               alt="Logo icon for PC"
             />
-          </button>
+          </a>
           <div className="border-2 border-orange w-[40px] h-[40px] rounded-full flex items-center justify-center hover:cursor-pointer">
             <FontAwesomeIcon className="text-orange" icon={faLightbulb} />
           </div>
@@ -69,7 +70,11 @@ export default function NavBar() {
               setToggle(!toggle);
             }}
           >
-            <FontAwesomeIcon className="text-white text-2xl" icon={faBars} />
+            {toggle ? (
+              <FontAwesomeIcon className="text-white text-2xl" icon={faRectangleXmark} />
+            ) : (
+              <FontAwesomeIcon className="text-white text-2xl" icon={faBars} />
+            )}
           </button>
         ) : (
           <ul className="flex items-center h-full">

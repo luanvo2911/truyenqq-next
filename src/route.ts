@@ -1,7 +1,8 @@
 const routes = {
   truyenqq: {
     index: "/truyenqq",
-    update: "/truyenqq/update"
+    update: "/truyenqq/update",
+    privacyPolicy: "/truyenqq/privacy-policy",
   }
 }
 
