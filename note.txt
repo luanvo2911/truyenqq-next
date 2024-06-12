@@ -3,3 +3,18 @@ Enhance SEO performance:
 2. Image should have alt prop
 3. Increase contrast ratio between foreground and background
 4. Avoid large layout shift
+
+
+API
+Main api:
+1. https://api.mangadex.org
+  - /manga: list all manga
+  Ex: https://api.mangadex.org/manga?title=I Thought She Was a Yandere, but Apparently She's Even Worse (search base on title)
+
+  - /cover/:id : get all covers of a manga
+  Ex: https://api.mangadex.org/cover/9b3d511f-41b0-48d5-92da-50707b2f58a0
+
+2. https://uploads.mangadex.org
+  - https://uploads.mangadex.org/covers/:manga-id/:cover-filename
+
+

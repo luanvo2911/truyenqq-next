@@ -5,7 +5,10 @@ import { Suspense } from "react";
 import Loading from "./loading";
 import "./globals.css";
 
-const quicksand = Quicksand({ weight: ["400"], subsets: ["latin"] });
+const quicksand = Quicksand({
+  weight: ["300", "400", "500", "600", "700"],
+  subsets: ["latin"],
+});
 
 export const metadata: Metadata = {
   title: "Truyenqq Replica",
