@@ -1,43 +1,47 @@
 import Image from "next/image";
 
-import thumbnailImage from "@/public/static/thumbnail1.png";
+import { Poster } from "@/src/types/poster";
 
-export const MangaSpotlight = () => {
+export const MangaSpotlight = ({ props }: { props: Poster }) => {
   return (
-    <div className="relative">
-      <div className="w-[100vw] xl:w-[calc(100vw-20rem)] max-h-[calc(225px+4rem)] opacity-50 -translate-y-24">
+    <div className="relative w-full h-full">
+      <div className="w-[calc(100vw-1rem)] xl:w-[calc(100vw-20rem)] h-[calc(160px+2rem)] md:h-[calc(225px+4rem)] opacity-50 -translate-y-24">
         <Image
-          className="w-full object-cover"
-          src={thumbnailImage}
+          className="w-full h-auto object-cover"
+          src={props.image}
           alt="thumbnail"
         />
       </div>
-      <div className="absolute top-0 left-0">
-        <div className=" flex gap-4 p-4">
-          <Image
-            className="object-contain w-40"
-            src={thumbnailImage}
-            alt="thumbnail"
-          />
-          <div className="flex flex-col justify-between">
+      <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-white/[.2] to-white/[.8] flex">
+        <div className=" flex gap-4 p-4 items-stretch">
+          <div className="w-auto h-40 md:h-full aspect-[7/10]">
+            <Image
+              className="object-cover object-center w-full h-full"
+              src={props.image}
+              alt="thumbnail"
+            />
+          </div>
+          <div className="flex flex-col justify-between h-40 md:h-full">
             <div>
-              <div className="text-2xl font-black">
-                Boku no Ikezuna Konyakusha
+              <div className="text-xl font-black overflow-hidden">
+                {props.title.length > 70
+                  ? props.title.slice(0, 70) + "..."
+                  : props.title}
               </div>
               <div className="flex gap-2 flex-wrap">
-                <div className="bg-grey p-2 text-xs">Tag 1</div>
-                <div className="bg-grey p-2 text-xs">Tag 2</div>
-                <div className="bg-grey p-2 text-xs">Tag 3</div>
+                {props.tags.map((tag, index) => {
+                  return (
+                    <div key={index} className="bg-grey p-2 text-xs">
+                      {tag}
+                    </div>
+                  );
+                })}
               </div>
               <div className="font-semibold hidden md:block">
-                Miyuki-san is a young lady born in Kyoto. My relationship with
-                her cannot be described as good. Because… &quot;You’re very good
-                at flattery.&quot; Are those words sincere? Or just for show? A
-                frustrating love story where our feelings for each other keep
-                missing the mark.
+                {props.description}
               </div>
             </div>
-            <div className="font-bold italic">Fuyutani Riku</div>
+            <div className="font-bold italic">{props.author}</div>
           </div>
         </div>
       </div>

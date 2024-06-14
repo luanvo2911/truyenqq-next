@@ -9,7 +9,7 @@ export default function TruyenqqLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="w-screen h-screen overflow-y-scroll overflow-x-hidden">
+    <div className="w-screen h-auto overflow-x-hidden">
       <Suspense fallback={<Loading />}>
         <NavBar />
         {children}

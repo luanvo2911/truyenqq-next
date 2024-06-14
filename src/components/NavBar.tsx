@@ -62,36 +62,72 @@ export default function NavBar() {
           </button>
         </div>
       </div>
-      <div className="max-w-full h-[40%] bg-orange px-4 xl:px-40 mt-4">
+      <div className="max-w-full h-[40%] bg-orange p-4 xl:px-40 mt-4">
         {isMobile ? (
           <button
-            className="flex justify-end items-center h-full w-full py-4"
+            className="flex justify-end items-center h-full w-full"
             onClick={() => {
               setToggle(!toggle);
             }}
           >
             {toggle ? (
-              <FontAwesomeIcon className="text-white text-2xl" icon={faRectangleXmark} />
+              <FontAwesomeIcon
+                className="text-white text-2xl"
+                icon={faRectangleXmark}
+              />
             ) : (
               <FontAwesomeIcon className="text-white text-2xl" icon={faBars} />
             )}
           </button>
         ) : (
           <ul className="flex items-center h-full">
-            <li className="text-white hover:bg-white/[0.2] hover:cursor-pointer p-4">
-              Trang chủ
+            <li>
+              <a
+                className="text-white hover:bg-white/[0.2] hover:cursor-pointer p-4"
+                href="/truyenqq"
+              >
+                Trang chủ
+              </a>
             </li>
-            <li className="text-white bg-transparent hover:bg-white/[0.2] hover:cursor-pointer p-4">
-              Thể loại
+            <li>
+              <a
+                className="text-white hover:bg-white/[0.2] hover:cursor-pointer p-4"
+                href="/truyenqq/update"
+              >
+                Cập nhật
+              </a>
             </li>
-            <li className="text-white hover:bg-white/[0.2] hover:cursor-pointer p-4">
-              Xếp hạng
+            <li>
+              <a
+                className="text-white hover:bg-white/[0.2] hover:cursor-pointer p-4"
+                href="/"
+              >
+                Thể loại
+              </a>
             </li>
-            <li className="text-white hover:bg-white/[0.2] hover:cursor-pointer p-4">
-              Tìm truyện
+            <li>
+              <a
+                className="text-white hover:bg-white/[0.2] hover:cursor-pointer p-4"
+                href="/"
+              >
+                Xếp hạng
+              </a>
             </li>
-            <li className="text-white hover:bg-white/[0.2] hover:cursor-pointer p-4">
-              Lịch sử
+            <li>
+              <a
+                className="text-white hover:bg-white/[0.2] hover:cursor-pointer p-4"
+                href="/"
+              >
+                Tìm truyện
+              </a>
+            </li>
+            <li>
+              <a
+                className="text-white hover:bg-white/[0.2] hover:cursor-pointer p-4"
+                href="/"
+              >
+                Lịch sử
+              </a>
             </li>
           </ul>
         )}
@@ -99,21 +135,42 @@ export default function NavBar() {
       {toggle && isMobile ? (
         <div className="max-w-full bg-orange px-4 xl:px-40">
           <ul className="flex flex-col h-full">
-            <li className="text-white hover:bg-white/[0.2] hover:cursor-pointer p-4">
+            <a
+              className="text-white hover:bg-white/[0.2] hover:cursor-pointer p-4"
+              href="/truyenqq"
+            >
               Trang chủ
-            </li>
-            <li className="text-white hover:bg-white/[0.2] hover:cursor-pointer p-4">
+            </a>
+            <a
+              className="text-white hover:bg-white/[0.2] hover:cursor-pointer p-4"
+              href="/truyenqq/update"
+            >
+              Cập nhật
+            </a>
+            <a
+              className="text-white hover:bg-white/[0.2] hover:cursor-pointer p-4"
+              href="/"
+            >
               Thể loại
-            </li>
-            <li className="text-white hover:bg-white/[0.2] hover:cursor-pointer p-4">
+            </a>
+            <a
+              className="text-white hover:bg-white/[0.2] hover:cursor-pointer p-4"
+              href="/"
+            >
               Xếp hạng
-            </li>
-            <li className="text-white hover:bg-white/[0.2] hover:cursor-pointer p-4">
+            </a>
+            <a
+              className="text-white hover:bg-white/[0.2] hover:cursor-pointer p-4"
+              href="/"
+            >
               Tìm truyện
-            </li>
-            <li className="text-white hover:bg-white/[0.2] hover:cursor-pointer p-4">
+            </a>
+            <a
+              className="text-white hover:bg-white/[0.2] hover:cursor-pointer p-4"
+              href="/"
+            >
               Lịch sử
-            </li>
+            </a>
           </ul>
         </div>
       ) : (
