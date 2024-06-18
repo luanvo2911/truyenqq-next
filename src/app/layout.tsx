@@ -23,7 +23,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <Suspense fallback={<Loading />}>
-        <body className={quicksand.className}>
+        <body className={quicksand.className + " w-screen overflow-x-hidden bg-grey-bg"} >
           {children}
           <SpeedInsights />
         </body>

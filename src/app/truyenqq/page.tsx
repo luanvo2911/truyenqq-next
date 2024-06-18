@@ -54,7 +54,7 @@ export default function Truyenqq() {
       <div>
         <div className="text-normalBlue flex items-center">
           <FontAwesomeIcon icon={faCloudArrowDown} />
-          <div className="text-xl font-bold">Truyện mới cập nhật</div>
+          <div className="text-xl font-bold">Truyện hay</div>
         </div>
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 py-4 gap-4">
           <MangaCard />

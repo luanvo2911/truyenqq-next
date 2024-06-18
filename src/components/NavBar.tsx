@@ -100,7 +100,10 @@ export default function NavBar() {
             <li>
               <a
                 className="text-white hover:bg-white/[0.2] hover:cursor-pointer p-4"
-                href="/"
+                href="/truyenqq/search"
+                onMouseEnter={()=>{
+                  console.log('focus')
+                }}
               >
                 Thể loại
               </a>

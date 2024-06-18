@@ -15,7 +15,8 @@ const config: Config = {
         'normalBlue': '#56CCF2',
         'black': '#000000',
         'red': '#FF2853',
-        'grey': '#E2E2E2'
+        'grey': '#E2E2E2',
+        'grey-bg': '#EBEBEB'
       }
     },
   },
