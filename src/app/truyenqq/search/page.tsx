@@ -3,7 +3,9 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFlag } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
+import useTag from "@/src/hooks/useTag";
 import _ from "lodash";
+import { Tag } from "@/src/api/schema";
 
 interface Filter {
   genre: String;
@@ -13,15 +15,8 @@ interface Filter {
 }
 
 export default function Search() {
-  const genre = [
-    "Adventure",
-    "Anime",
-    "Chuyển sinh",
-    "Cổ đại",
-    "Comedy",
-    "Comics",
-    "Demon",
-  ];
+  const {response, error, isLoading} = useTag();
+  const genre: Tag[] = response ?? [];
   const updateState = ["Đang tiến hành", "Hoàn thành"];
   const country = ["Trung Quốc", "Việt Nam", "Hàn Quốc", "Nhật Bản", "Mỹ"];
   const sort = [
@@ -31,7 +26,7 @@ export default function Search() {
     "Ngày cập nhật tăng dần",
   ];
   const [filter, setFilter] = useState<Filter>({
-    genre: genre[0],
+    genre: "",
     updateState: [],
     country: [],
     sort: sort[0],
@@ -66,10 +61,11 @@ export default function Search() {
                 }}
                 className="p-2 border-2 border-inherit rounded-sm"
               >
-                {genre.map((g, index) => {
+                {genre.map((g: Tag, index) => {
+                  const tagName = _.get(g, ['attributes', 'name', 'en'])
                   return (
-                    <option key={index} value={g}>
-                      {g}
+                    <option key={index} value={tagName}>
+                      {tagName}
                     </option>
                   );
                 })}
