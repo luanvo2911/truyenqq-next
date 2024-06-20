@@ -9,7 +9,7 @@
         },
         {
           "key": "Access-Control-Allow-Origin",
-          "value": "*"
+          "value": ["https://truyenqq-next.vercel.app/truyenqq", "http://localhost:3000/**"]
         },
         {
           "key": "Access-Control-Allow-Methods",
