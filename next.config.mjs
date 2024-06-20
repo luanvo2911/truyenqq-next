@@ -17,7 +17,7 @@ const nextConfig = {
         source: "/(.*)",
         headers: [
           { key: "Access-Control-Allow-Credentials", value: "true" },
-          { key: "Access-Control-Allow-Origin", value: ["https://truyenqq-next.vercel.app/**", "http://localhost:3000/**"] },
+          { key: "Access-Control-Allow-Origin", value: "https://truyenqq-next.vercel.app/**" },
           {
             key: "Access-Control-Allow-Methods",
             value: "GET,OPTIONS,PATCH,DELETE,POST,PUT",
