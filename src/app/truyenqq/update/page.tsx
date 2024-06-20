@@ -4,6 +4,9 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFlag } from "@fortawesome/free-solid-svg-icons";
 import MangaCard from "@/src/components/MangaCard";
 import { useState } from "react";
+import { useMangaList } from "@/src/hooks/useMangaList";
+import { Manga } from "@/src/api/schema";
+import { Pagination } from "antd";
 
 import _ from "lodash";
 
@@ -15,6 +18,11 @@ interface Filter {
 export default function Update() {
   const updateState = ["Đang tiến hành", "Hoàn thành"];
   const country = ["Trung Quốc", "Việt Nam", "Hàn Quốc", "Nhật Bản", "Mỹ"];
+  const [pagination, setPagination] = useState(0);
+  const { mangaListResponse, error, isLoading } = useMangaList({
+    limit: 42,
+    offset: pagination * 42,
+  });
 
   const [filter, setFilter] = useState<Filter>({
     updateState: [],
@@ -97,43 +105,22 @@ export default function Update() {
       </div>
       <div>
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 py-4 gap-4">
-          <MangaCard />
-          <MangaCard />
-          <MangaCard />
-          <MangaCard />
-          <MangaCard />
-          <MangaCard />
-          <MangaCard />
-          <MangaCard />
-          <MangaCard />
-          <MangaCard />
-          <MangaCard />
-          <MangaCard />
-          <MangaCard />
-          <MangaCard />
-          <MangaCard />
-          <MangaCard />
-          <MangaCard />
-          <MangaCard />
-          <MangaCard />
-          <MangaCard />
-          <MangaCard />
-          <MangaCard />
-          <MangaCard />
-          <MangaCard />
-          <MangaCard />
-          <MangaCard />
-          <MangaCard />
-          <MangaCard />
-          <MangaCard />
-          <MangaCard />
-          <MangaCard />
-          <MangaCard />
-          <MangaCard />
-          <MangaCard />
-          <MangaCard />
-          <MangaCard />
+          {mangaListResponse?.map((manga: Manga, index: number) => {
+            return <MangaCard key={index} props={manga} />;
+          })}
         </div>
+      </div>
+      <div className="flex items-center w-full justify-center">
+        <Pagination
+          className="text-xl"
+          current={pagination + 1}
+          defaultPageSize={42}
+          total={42*200}
+          showSizeChanger={false}
+          onChange={(page: number, pageSize: number) => {
+            setPagination(page - 1);
+          }}
+        />
       </div>
     </div>
   );

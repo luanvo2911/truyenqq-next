@@ -1,19 +1,45 @@
 import Image from "next/image";
 
 import thumbnailImage from "@/public/static/thumbnail.png";
+import { Manga } from "../api/schema";
+import getDateFns from "../utils/dateFns";
+import _ from "lodash";
+import getCoverArt from "../utils/getCoverImage";
+import reduceText from "../utils/reduceText";
 
-export default function MangaCard() {
+export default function MangaCard({ props }: { props: Manga }) {
   return (
     <div className="object-cover flex flex-col items-center">
-      <div className = "relative">
-        <div className = "absolute flex">
-          <div className = "object-cover bg-normalBlue z-10 m-2 text-white text-sm px-[1px] rounded-[4px]">10 phút trước</div>
-          <div className = "object-cover bg-red z-10 my-2 text-white text-sm px-[1px] rounded-[4px]">Hot</div>
+      <div className="relative w-full">
+        <div className="absolute flex w-full">
+          <div className="object-cover bg-normalBlue z-10 m-2 text-white text-sm px-[4px] rounded-[4px]">
+            {getDateFns(_.get(props, ["attributes", "updatedAt"]))}
+          </div>
+          <div className="object-cover bg-red z-10 my-2 text-white text-sm px-[4px] rounded-[4px]">
+            Hot
+          </div>
         </div>
-        <Image src={thumbnailImage} width={160} height={150} alt="thumbnail" />
+        {/* <Image src={getCoverArt(props)} width={160} height={150} alt="thumbnail" /> */}
+        <div className="w-full h-auto md:h-full aspect-[7/10]">
+          <picture>
+            <img
+              loading="lazy"
+              className="object-cover object-center w-full h-full"
+              src={getCoverArt(props)}
+              alt="thumbnail"
+            />
+          </picture>
+        </div>
       </div>
-      <div className="font-bold text-base">Manga Title</div>
-      <div className="font-semibold text-xs">Chap 123</div>
+      <div className="font-bold text-base text-center">
+        {reduceText(_.get(props, ["attributes", "title", "en"]), 25)}
+      </div>
+      <div className="font-semibold text-xs">
+        Chap{" "}
+        {_.get(props, ["attributes", "lastChapter"]) == " "
+          ? _.get(props, ["attributes", "lastChapter"])
+          : "0"}
+      </div>
     </div>
   );
 }

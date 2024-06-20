@@ -15,7 +15,7 @@ export const SpotlightSlider = ({ children }: { children: ReactNode }) => {
         {children}
       </div>
       <div className="absolute right-0 xl:right-[10rem] gap-4 flex items-center">
-        <div className={`text-base font-bold text-${curr == 0 ? 'red': 'black'}`}>No. {curr + 1}</div>
+        <div className={`text-lg font-bold text-${curr == 0 ? 'red': 'black'}`}>No. {curr + 1}</div>
         <FontAwesomeIcon
           icon={faLeftLong}
           className="hover:cursor-pointer hover:bg-slate-300 rounded-full z-10 p-4 "

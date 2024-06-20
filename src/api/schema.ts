@@ -55,8 +55,8 @@ export interface MangaAttributes {
   tags: Tag[];
   state: string;
   // chapterNumberResetOnNewVolume: boolean;
-  createdAt: Date;
-  updateAt: Date;
+  createdAt: string;
+  updatedAt: string;
   version: number;
   // availableTranslatedLanguages: string[];
   latestUploadedChapter: string;
@@ -76,8 +76,24 @@ export interface Cover {
     volume: string;
     filename: string;
     local: string;
-    createdAt: Date;
-    updatedAt: Date;
+    createdAt: string;
+    updatedAt: string;
     version: number;
+  };
+}
+
+export interface Author {
+  id: string;
+  type: "author";
+  attributes: {
+    name: string;
+  };
+}
+
+export interface CoverArt {
+  id: string;
+  type: "cover_art";
+  attributes: {
+    fileName: string;
   };
 }
