@@ -23,10 +23,19 @@ export interface TagAttributes {
   version: string;
 }
 
-export interface MangaResponse {
+export interface MangaListResponse {
   result: string;
   response: string;
   data: Manga[];
+  limit: number;
+  offset: number;
+  total: number;
+}
+
+export interface MangaResponse {
+  result: string;
+  response: string;
+  data: Manga;
   limit: number;
   offset: number;
   total: number;

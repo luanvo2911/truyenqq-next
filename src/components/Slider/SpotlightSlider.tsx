@@ -20,7 +20,6 @@ export const SpotlightSlider = ({ children }: { children: ReactNode }) => {
           icon={faLeftLong}
           className="hover:cursor-pointer hover:bg-slate-300 rounded-full z-10 p-4 "
           onClick={() => {
-            console.log("Prev");
             if (curr > 0) {
               setCurr(curr - 1);
             } else {
@@ -32,7 +31,6 @@ export const SpotlightSlider = ({ children }: { children: ReactNode }) => {
           icon={faRightLong}
           className="hover:cursor-pointer hover:bg-slate-300 rounded-full z-10 p-4 "
           onClick={() => {
-            console.log("next");
             if (curr < Children.count(children) - 1) {
               setCurr(curr + 1);
             } else {

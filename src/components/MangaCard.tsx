@@ -1,3 +1,5 @@
+"use client";
+
 import Image from "next/image";
 
 import thumbnailImage from "@/public/static/thumbnail.png";
@@ -6,10 +8,21 @@ import getDateFns from "../utils/dateFns";
 import _ from "lodash";
 import getCoverArt from "../utils/getCoverImage";
 import reduceText from "../utils/reduceText";
+import Link from "next/link";
+import useMangaStore from "../store/manga";
+// import { useRouter } from "next/navigation";
 
 export default function MangaCard({ props }: { props: Manga }) {
+  const { manga, setManga } = useMangaStore();
+  // const router = useRouter();
   return (
-    <div className="object-cover flex flex-col items-center">
+    <Link
+      className="object-cover flex flex-col items-center"
+      href={`/truyenqq/${props.id}`}
+      onClick={(event: any) => {
+        setManga(props);
+      }}
+    >
       <div className="relative w-full">
         <div className="absolute flex w-full">
           <div className="object-cover bg-normalBlue z-10 m-2 text-white text-sm px-[4px] rounded-[4px]">
@@ -32,14 +45,17 @@ export default function MangaCard({ props }: { props: Manga }) {
         </div>
       </div>
       <div className="font-bold text-base text-center">
-        {reduceText(_.get(props, ["attributes", "title", "en"]), 25)}
+        {reduceText(
+          _.get(props, ["attributes", "altTitles", "0", "vi"]) ??
+            _.get(props, ["attributes", "title", "en"]),
+          25
+        )}
       </div>
       <div className="font-semibold text-xs">
-        Chap{" "}
-        {_.get(props, ["attributes", "lastChapter"]) == " "
-          ? _.get(props, ["attributes", "lastChapter"])
-          : "0"}
+        {_.get(props, ["attributes", "lastChapter"]) !== ""
+          ? "Chap " + _.get(props, ["attributes", "lastChapter"])
+          : "Đang cập nhật ..."}
       </div>
-    </div>
+    </Link>
   );
 }

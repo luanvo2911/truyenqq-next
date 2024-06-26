@@ -2,7 +2,7 @@
 
 import useSWR from "swr";
 import { Manga } from "../api";
-import { MangaResponse } from "../api/schema";
+import { MangaResponse, MangaListResponse } from "../api/schema";
 
 const useSpotlightList = () => {
   const { data, error, isLoading } = useSWR(
@@ -18,7 +18,7 @@ const useSpotlightList = () => {
   );
 
   const spotLightResponse =
-    data && data.data && (data.data as MangaResponse).data;
+    data && data.data && (data.data as MangaListResponse).data;
 
   return { spotLightResponse, error, isLoading };
 };
@@ -37,9 +37,25 @@ const useMangaList = ({ limit, offset }: { limit: number; offset: number }) => {
     Manga.getMangaList
   );
   const mangaListResponse =
-    data && data.data && (data.data as MangaResponse).data;
+    data && data.data && (data.data as MangaListResponse).data;
 
   return { mangaListResponse, error, isLoading };
 };
 
-export { useSpotlightList, useMangaList };
+const useMangaInfo = (id: string) => {
+  const { data, error, isLoading } = useSWR(
+    [
+      `/manga/${id}`,
+      {
+        "includes[]": ["cover_art", "author"],
+      },
+    ],
+    Manga.getManga
+  );
+  const mangaResponse =
+    data && data.data && (data.data as MangaResponse).data;
+
+  return { mangaResponse, error, isLoading };
+};
+
+export { useSpotlightList, useMangaList, useMangaInfo };

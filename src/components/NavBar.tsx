@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import logoMobile from "@/public/static/logo-mobile.png";
 import logoPC from "@/public/static/logo-pc.png";
 import Image from "next/image";
@@ -20,14 +21,14 @@ export default function NavBar() {
     <div className="w-screen min-h-[100px]">
       <div className="max-w-full flex justify-between items-center px-2 xl:px-40 pt-4">
         <div className="flex items-center space-x-4">
-          <a href="/">
+          <Link href="/">
             <Image
               src={isMobile ? logoMobile : logoPC}
               width={isMobile ? 30 : 150}
               height={isMobile ? 30 : 150}
               alt="Logo icon for PC"
             />
-          </a>
+          </Link>
           <div className="border-2 border-orange w-[40px] h-[40px] rounded-full flex items-center justify-center hover:cursor-pointer">
             <FontAwesomeIcon className="text-orange" icon={faLightbulb} />
           </div>
@@ -82,23 +83,23 @@ export default function NavBar() {
         ) : (
           <ul className="flex items-center h-full">
             <li>
-              <a
+              <Link
                 className="text-white hover:bg-white/[0.2] hover:cursor-pointer p-4"
                 href="/truyenqq"
               >
                 Trang chủ
-              </a>
+              </Link>
             </li>
             <li>
-              <a
+              <Link
                 className="text-white hover:bg-white/[0.2] hover:cursor-pointer p-4"
                 href="/truyenqq/update"
               >
                 Cập nhật
-              </a>
+              </Link>
             </li>
             <li>
-              <a
+              <Link
                 className="text-white hover:bg-white/[0.2] hover:cursor-pointer p-4"
                 href="/truyenqq/search"
                 onMouseEnter={()=>{
@@ -106,31 +107,31 @@ export default function NavBar() {
                 }}
               >
                 Thể loại
-              </a>
+              </Link>
             </li>
             <li>
-              <a
+              <Link
                 className="text-white hover:bg-white/[0.2] hover:cursor-pointer p-4"
                 href="/"
               >
                 Xếp hạng
-              </a>
+              </Link>
             </li>
             <li>
-              <a
+              <Link
                 className="text-white hover:bg-white/[0.2] hover:cursor-pointer p-4"
                 href="/"
               >
                 Tìm truyện
-              </a>
+              </Link>
             </li>
             <li>
-              <a
+              <Link
                 className="text-white hover:bg-white/[0.2] hover:cursor-pointer p-4"
                 href="/"
               >
                 Lịch sử
-              </a>
+              </Link>
             </li>
           </ul>
         )}
@@ -138,42 +139,42 @@ export default function NavBar() {
       {toggle && isMobile ? (
         <div className="max-w-full bg-orange px-4 xl:px-40">
           <ul className="flex flex-col h-full">
-            <a
+            <Link
               className="text-white hover:bg-white/[0.2] hover:cursor-pointer p-4"
               href="/truyenqq"
             >
               Trang chủ
-            </a>
-            <a
+            </Link>
+            <Link
               className="text-white hover:bg-white/[0.2] hover:cursor-pointer p-4"
               href="/truyenqq/update"
             >
               Cập nhật
-            </a>
-            <a
+            </Link>
+            <Link
               className="text-white hover:bg-white/[0.2] hover:cursor-pointer p-4"
               href="/truyenqq/search"
             >
               Thể loại
-            </a>
-            <a
+            </Link>
+            <Link
               className="text-white hover:bg-white/[0.2] hover:cursor-pointer p-4"
               href="/"
             >
               Xếp hạng
-            </a>
-            <a
+            </Link>
+            <Link
               className="text-white hover:bg-white/[0.2] hover:cursor-pointer p-4"
               href="/"
             >
               Tìm truyện
-            </a>
-            <a
+            </Link>
+            <Link
               className="text-white hover:bg-white/[0.2] hover:cursor-pointer p-4"
               href="/"
             >
               Lịch sử
-            </a>
+            </Link>
           </ul>
         </div>
       ) : (

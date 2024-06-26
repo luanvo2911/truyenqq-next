@@ -6,6 +6,8 @@ import { faStar, faCloudArrowDown } from "@fortawesome/free-solid-svg-icons";
 import { SpotlightSlider } from "@/src/components/Slider/SpotlightSlider";
 import { MangaSpotlight } from "@/src/components/Slider/MangaSpotlight";
 import { Manga } from "@/src/api/schema";
+import Link from "next/link";
+import { Spin } from "antd";
 
 import { useSpotlightList, useMangaList } from "@/src/hooks/useMangaList";
 
@@ -13,7 +15,7 @@ import { useSpotlightList, useMangaList } from "@/src/hooks/useMangaList";
 
 export default function Truyenqq() {
   const { spotLightResponse } = useSpotlightList();
-  const { mangaListResponse } = useMangaList({
+  const { mangaListResponse, error, isLoading } = useMangaList({
     limit: 42,
     offset: 0,
   });
@@ -38,15 +40,22 @@ export default function Truyenqq() {
           <div className="text-xl font-bold">Truyện hay</div>
         </div>
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 py-4 gap-6">
-          {mangaListResponse?.map((manga: Manga, index: number) => {
-            return <MangaCard key={index} props={manga} />;
-          })}
+          {isLoading ? (
+            <Spin />
+          ) : (
+            mangaListResponse?.map((manga: Manga, index: number) => {
+              return <MangaCard key={index} props={manga} />;
+            })
+          )}
         </div>
       </div>
-      <div className = "flex w-full justify-center">
-        <a className = "bg-orange p-4 text-white font-semibold rounded-lg hover:bg-orange/[.8]" href = "/truyenqq/update">
+      <div className="flex w-full justify-center">
+        <Link
+          className="bg-orange p-4 text-white font-semibold rounded-lg hover:bg-orange/[.8]"
+          href="/truyenqq/update"
+        >
           Xem thêm nhiều truyện hay
-        </a>
+        </Link>
       </div>
     </div>
   );

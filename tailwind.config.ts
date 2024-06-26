@@ -16,7 +16,9 @@ const config: Config = {
         'black': '#000000',
         'red': '#FF2853',
         'grey': '#E2E2E2',
-        'grey-bg': '#EBEBEB'
+        'grey-bg': '#EBEBEB',
+        'green': '#8BC34A',
+        'purple': '#BD10E0'
       }
     },
   },

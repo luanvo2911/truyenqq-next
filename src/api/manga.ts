@@ -1,5 +1,5 @@
 import { instance } from "./utils";
-import { MangaResponse, TagResponse } from "./schema";
+import { MangaListResponse, MangaResponse, TagResponse } from "./schema";
 
 /**
  * getMangaTag function: get list of all manga tags
@@ -12,8 +12,14 @@ export const getMangaTag = (path: string) => {
 };
 
 export const getMangaList = ([path, query]: [path: string, query: Object]) => {
-  return instance.get<MangaResponse>(path, {
+  return instance.get<MangaListResponse>(path, {
     params: query,
   });
 };
 
+
+export const getManga = ([path, query]: [path: string, query: Object]) => {
+  return instance.get<MangaResponse>(path, {
+    params: query,
+  });
+};
