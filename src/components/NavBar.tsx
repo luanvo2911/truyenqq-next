@@ -1,22 +1,26 @@
 "use client";
 
-import Link from "next/link";
 import logoMobile from "@/public/static/logo-mobile.png";
 import logoPC from "@/public/static/logo-pc.png";
+import {
+  faBars,
+  faLightbulb,
+  faRectangleXmark,
+  faSearch,
+} from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Image from "next/image";
+import Link from "next/link";
 import useIsMobile from "../hooks/useIsMobile";
 import useToggle from "../hooks/useToggle";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faSearch,
-  faLightbulb,
-  faBars,
-  faRectangleXmark,
-} from "@fortawesome/free-solid-svg-icons";
 
 export default function NavBar() {
   const isMobile = useIsMobile();
   const { toggle, setToggle } = useToggle();
+  const handleClick = () => {
+    setToggle(!toggle);
+  };
+
   return (
     <div className="w-screen min-h-[100px]">
       <div className="max-w-full flex justify-between items-center px-2 xl:px-40 pt-4">
@@ -67,9 +71,7 @@ export default function NavBar() {
         {isMobile ? (
           <button
             className="flex justify-end items-center h-full w-full"
-            onClick={() => {
-              setToggle(!toggle);
-            }}
+            onClick={handleClick}
           >
             {toggle ? (
               <FontAwesomeIcon
@@ -102,8 +104,8 @@ export default function NavBar() {
               <Link
                 className="text-white hover:bg-white/[0.2] hover:cursor-pointer p-4"
                 href="/truyenqq/search"
-                onMouseEnter={()=>{
-                  console.log('focus')
+                onMouseEnter={() => {
+                  console.log("focus");
                 }}
               >
                 Thể loại
@@ -142,36 +144,42 @@ export default function NavBar() {
             <Link
               className="text-white hover:bg-white/[0.2] hover:cursor-pointer p-4"
               href="/truyenqq"
+              onClick={handleClick}
             >
               Trang chủ
             </Link>
             <Link
               className="text-white hover:bg-white/[0.2] hover:cursor-pointer p-4"
               href="/truyenqq/update"
+              onClick={handleClick}
             >
               Cập nhật
             </Link>
             <Link
               className="text-white hover:bg-white/[0.2] hover:cursor-pointer p-4"
               href="/truyenqq/search"
+              onClick={handleClick}
             >
               Thể loại
             </Link>
             <Link
               className="text-white hover:bg-white/[0.2] hover:cursor-pointer p-4"
               href="/"
+              onClick={handleClick}
             >
               Xếp hạng
             </Link>
             <Link
               className="text-white hover:bg-white/[0.2] hover:cursor-pointer p-4"
               href="/"
+              onClick={handleClick}
             >
               Tìm truyện
             </Link>
             <Link
               className="text-white hover:bg-white/[0.2] hover:cursor-pointer p-4"
               href="/"
+              onClick={handleClick}
             >
               Lịch sử
             </Link>

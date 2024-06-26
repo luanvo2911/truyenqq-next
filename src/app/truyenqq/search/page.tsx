@@ -26,7 +26,7 @@ export default function Search() {
     "Ngày cập nhật tăng dần",
   ];
   const [filter, setFilter] = useState<Filter>({
-    genre: "",
+    genre: "Oneshot",
     updateState: [],
     country: [],
     sort: sort[0],
@@ -61,7 +61,7 @@ export default function Search() {
                 }}
                 className="p-2 border-2 border-inherit rounded-sm"
               >
-                {genre.map((g: Tag, index) => {
+                {genre?.map((g: Tag, index) => {
                   const tagName = _.get(g, ['attributes', 'name', 'en'])
                   return (
                     <option key={index} value={tagName}>

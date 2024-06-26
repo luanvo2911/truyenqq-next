@@ -12,7 +12,7 @@ const getCoverArt = (manga: Manga | Manga[] | undefined | null) => {
       ? `https://uploads.mangadex.org/covers/${_.get(manga, [
           "id",
         ])}/${fileName}`
-      : "https://placewaifu.com/image/200";
+      : placeholderImage.src;
   } else return placeholderImage.src;
 };
 

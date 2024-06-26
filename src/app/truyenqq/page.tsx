@@ -1,24 +1,29 @@
 "use client";
 
-import MangaCard from "@/src/components/MangaCard";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faStar, faCloudArrowDown } from "@fortawesome/free-solid-svg-icons";
-import { SpotlightSlider } from "@/src/components/Slider/SpotlightSlider";
-import { MangaSpotlight } from "@/src/components/Slider/MangaSpotlight";
 import { Manga } from "@/src/api/schema";
-import Link from "next/link";
+import MangaCard from "@/src/components/MangaCard";
+import { MangaSpotlight } from "@/src/components/Slider/MangaSpotlight";
+import { SpotlightSlider } from "@/src/components/Slider/SpotlightSlider";
+import { faCloudArrowDown, faStar } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Spin } from "antd";
+import Link from "next/link";
 
-import { useSpotlightList, useMangaList } from "@/src/hooks/useMangaList";
+import { useMangaList, useSpotlightList } from "@/src/hooks/useMangaList";
 
 // max manga card = 6col * 7 row
 
 export default function Truyenqq() {
-  const { spotLightResponse } = useSpotlightList();
-  const { mangaListResponse, error, isLoading } = useMangaList({
+  const { spotLightResponse, spotLightListError, spotLightListLoading } = useSpotlightList({
+    limit: 10,
+    offset: 0
+  });
+  const { mangaListResponse, mangaListError, mangaListLoading } = useMangaList({
     limit: 42,
     offset: 0,
   });
+  console.log({ spotLightResponse, spotLightListError, spotLightListLoading });
+  console.log({ mangaListResponse, mangaListError, mangaListLoading });
   return (
     <div className="w-full h-auto px-2 xl:px-40 py-4">
       <div>
@@ -27,11 +32,15 @@ export default function Truyenqq() {
           <div className="text-xl font-bold">Truyện Đề cử</div>
         </div>
         <div className="flex justify-around py-4 mb-8">
-          <SpotlightSlider>
-            {spotLightResponse?.map((res: Manga, index: number) => {
-              return <MangaSpotlight key={index} props={res} />;
-            })}
-          </SpotlightSlider>
+          {spotLightListLoading ? (
+            <Spin />
+          ) : (
+            <SpotlightSlider>
+              {spotLightResponse?.map((res: Manga, index: number) => {
+                return <MangaSpotlight key={index} props={res} />;
+              })}
+            </SpotlightSlider>
+          )}
         </div>
       </div>
       <div>
@@ -40,7 +49,7 @@ export default function Truyenqq() {
           <div className="text-xl font-bold">Truyện hay</div>
         </div>
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 py-4 gap-6">
-          {isLoading ? (
+          {mangaListLoading ? (
             <Spin />
           ) : (
             mangaListResponse?.map((manga: Manga, index: number) => {

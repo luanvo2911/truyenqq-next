@@ -1,12 +1,11 @@
-import Image from "next/image";
-import Link from "next/link";
-import _ from "lodash";
-import { Manga, Author } from "@/src/api/schema";
-import getCoverArt from "@/src/utils/getCoverImage";
+import { Author, Manga } from "@/src/api/schema";
 import useIsMobile from "@/src/hooks/useIsMobile";
-import getDateFns from "@/src/utils/dateFns";
-import reduceText from "@/src/utils/reduceText";
 import useMangaStore from "@/src/store/manga";
+import getDateFns from "@/src/utils/dateFns";
+import getCoverArt from "@/src/utils/getCoverImage";
+import reduceText from "@/src/utils/reduceText";
+import _ from "lodash";
+import Link from "next/link";
 
 export const MangaSpotlight = ({ props }: { props: Manga }) => {
   const isMobile = useIsMobile();

@@ -1,31 +1,32 @@
 "use client";
-import { Breadcrumb } from "antd";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faUser,
-  faRss,
-  faHeart,
-  faEye,
-  faThumbsUp,
-  faBook,
-  faLocationArrow,
-  faInfoCircle,
-  faDatabase,
-  faComments,
-} from "@fortawesome/free-solid-svg-icons";
-import Link from "next/link";
-import useMangaStore from "@/src/store/manga";
-import _ from "lodash";
-import getCoverArt from "@/src/utils/getCoverImage";
-import { Author, Tag } from "@/src/api/schema";
+import { Tag } from "@/src/api/schema";
 import { useMangaInfo } from "@/src/hooks/useMangaList";
+import getCoverArt from "@/src/utils/getCoverImage";
+import {
+  faBook,
+  faComments,
+  faDatabase,
+  faEye,
+  faHeart,
+  faInfoCircle,
+  faLocationArrow,
+  faRss,
+  faThumbsUp,
+  faUser,
+} from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Breadcrumb, Spin } from "antd";
+import _ from "lodash";
+import Link from "next/link";
 
 export default function Page({ params }: { params: { slug: string } }) {
   // use router
   // const { manga } = useMangaStore();
-  const { mangaResponse } = useMangaInfo(params.slug);
-  console.log(mangaResponse)
-  return (
+  const { mangaResponse, error, isLoading } = useMangaInfo(params.slug);
+  console.log({ mangaResponse, error, isLoading });
+  return isLoading ? (
+    <Spin />
+  ) : (
     <div className="h-auto mx-2 xl:mx-40 my-4 bg-white p-4 flex flex-col gap-4">
       <Breadcrumb
         className="text-base"
@@ -83,7 +84,7 @@ export default function Page({ params }: { params: { slug: string } }) {
                 {_.filter(_.get(mangaResponse, "relationships"), [
                   "type",
                   "author",
-                ]).map((author: any, index: number) => {
+                ])?.map((author: any, index: number) => {
                   return (
                     <div key={index}>
                       {_.get(author, ["attributes", "name"])}
@@ -99,7 +100,7 @@ export default function Page({ params }: { params: { slug: string } }) {
           </div>
           <div className="flex gap-2 flex-wrap items-center">
             {mangaResponse ? (
-              _.get(mangaResponse, ["attributes", "tags"]).map(
+              _.get(mangaResponse, ["attributes", "tags"])?.map(
                 (tag: Tag, index: number) => {
                   return (
                     <Link
@@ -142,7 +143,8 @@ export default function Page({ params }: { params: { slug: string } }) {
           <div>Giới thiệu</div>
         </div>
         <div>
-          {(_.get(mangaResponse, ["attributes", "description", "vi"]) ?? _.get(mangaResponse, ["attributes", "description", "en"]))  ??
+          {_.get(mangaResponse, ["attributes", "description", "vi"]) ??
+            _.get(mangaResponse, ["attributes", "description", "en"]) ??
             "Mô tả truyện đang được cập nhật. Theo dõi truyện tại truyenqq-next"}
         </div>
       </div>

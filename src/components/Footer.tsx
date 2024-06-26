@@ -1,8 +1,8 @@
-import logoPC from "@/public/static/logo-pc.png";
 import footer from "@/public/static/footer.png";
+import logoPC from "@/public/static/logo-pc.png";
 import Image from "next/image";
-import { tags } from "../constants";
 import Link from "next/link";
+import { tags } from "../constants";
 
 export default function Footer() {
   return (
@@ -10,11 +10,21 @@ export default function Footer() {
       <div className="w-full h-[5px] bg-orange" />
       <div className="w-screen min-h-[100px] px-2 xl:px-40 py-4 space-y-8 lg:space-y-0 grid grid-cols-1 lg:grid-cols-2">
         <div>
-          <Link href="/">
-            <Image src={logoPC} width={150} height={150} alt="logoPC" />
+          <Link href="/truyenqq">
+            <Image
+              src={logoPC}
+              width={150}
+              height={150}
+              alt="logoPC"
+            />
           </Link>
           <div>
-            <Image src={footer} width={350} height={150} alt="fanpage" />
+            <Image
+              src={footer}
+              width={350}
+              height={150}
+              alt="fanpage"
+            />
           </div>
         </div>
 

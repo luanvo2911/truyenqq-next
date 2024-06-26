@@ -19,7 +19,7 @@ export default function Update() {
   const updateState = ["Đang tiến hành", "Hoàn thành"];
   const country = ["Trung Quốc", "Việt Nam", "Hàn Quốc", "Nhật Bản", "Mỹ"];
   const [pagination, setPagination] = useState(0);
-  const { mangaListResponse, error, isLoading } = useMangaList({
+  const { mangaListResponse, mangaListError, mangaListLoading } = useMangaList({
     limit: 42,
     offset: pagination * 42,
   });

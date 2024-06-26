@@ -1,15 +1,13 @@
 "use client";
 
-import Image from "next/image";
 
-import thumbnailImage from "@/public/static/thumbnail.png";
-import { Manga } from "../api/schema";
-import getDateFns from "../utils/dateFns";
 import _ from "lodash";
+import Link from "next/link";
+import { Manga } from "../api/schema";
+import useMangaStore from "../store/manga";
+import getDateFns from "../utils/dateFns";
 import getCoverArt from "../utils/getCoverImage";
 import reduceText from "../utils/reduceText";
-import Link from "next/link";
-import useMangaStore from "../store/manga";
 // import { useRouter } from "next/navigation";
 
 export default function MangaCard({ props }: { props: Manga }) {
