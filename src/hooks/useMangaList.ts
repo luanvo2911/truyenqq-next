@@ -8,11 +8,12 @@ const useSpotlightList = () => {
   const { data, error, isLoading } = useSWR(
     [
       "/manga",
-      {
-        "contentRating[]": "suggestive",
-        "includes[]": ["cover_art", "author"],
-        order: { updatedAt: "desc" },
-      },
+      // {
+      //   "contentRating[]": "suggestive",
+      //   "includes[]": ["cover_art", "author"],
+      //   order: { updatedAt: "desc" },
+      // },
+      "contentRating[]=suggestive&includes[]=cover_art&includes[]=author&order[updatedAt]=desc"
     ],
     Manga.getMangaList
   );
@@ -27,12 +28,13 @@ const useMangaList = ({ limit, offset }: { limit: number; offset: number }) => {
   const { data, error, isLoading } = useSWR(
     [
       "/manga",
-      {
-        "includes[]": ["cover_art", "author"],
-        offset: offset,
-        limit: limit,
-        order: { updatedAt: "desc" },
-      },
+      // {
+      //   "includes[]": ["cover_art", "author"],
+      //   offset: offset,
+      //   limit: limit,
+      //   order: { updatedAt: "desc" },
+      // },
+      `includes[]=cover_art&includes[]=author&order[updatedAt]=desc&offset=${offset}&limit=${limit}`
     ],
     Manga.getMangaList
   );

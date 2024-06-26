@@ -1,5 +1,6 @@
 import { instance } from "./utils";
 import { MangaListResponse, MangaResponse, TagResponse } from "./schema";
+import qs from 'qs';
 
 /**
  * getMangaTag function: get list of all manga tags
@@ -7,19 +8,21 @@ import { MangaListResponse, MangaResponse, TagResponse } from "./schema";
  * @param {string} path - /manga/tag
  * @returns {Promise}
  */
+
+
+
 export const getMangaTag = (path: string) => {
-  return instance.get<TagResponse>(path);
+  return instance(path).get<TagResponse>("/");
 };
 
 export const getMangaList = ([path, query]: [path: string, query: Object]) => {
-  return instance.get<MangaListResponse>(path, {
-    params: query,
-  });
+  console.log(query)
+  console.log(path + query)
+  return instance(path + `?${query}`).get<MangaListResponse>("/");
 };
 
 
 export const getManga = ([path, query]: [path: string, query: Object]) => {
-  return instance.get<MangaResponse>(path, {
-    params: query,
-  });
+  console.log(path + query)
+  return instance(path + `?${query}`).get<MangaResponse>("/");
 };

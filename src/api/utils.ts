@@ -2,16 +2,17 @@ import axios from "axios";
 
 const API_ENDPOINT = "https://api.mangadex.org";
 
-console.log({"Authorization": "Bearer " + process.env.TOKEN_ID});
+const corsConfig = "http://localhost:3000"
 
-export const instance = axios.create({
-  baseURL: API_ENDPOINT,
+export const instance = (path: string) => axios.create({
+  baseURL: corsConfig,
   headers: {
     // "Content-Type": "application/json",
     "Access-Control-Allow-Origin": "*",
     "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
     "Access-Control-Allow-Credentials": "true",
     "Access-Control-Allow-Headers": "*",
-    "Authorization": "Bearer " + process.env.TOKEN_ID
+    "Target-URL": API_ENDPOINT + path
+    // "Authorization": "Bearer " + process.env.TOKEN_ID
   },
 });
