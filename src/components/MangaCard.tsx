@@ -4,22 +4,15 @@
 import _ from "lodash";
 import Link from "next/link";
 import { Manga } from "../api/schema";
-import useMangaStore from "../store/manga";
 import getDateFns from "../utils/dateFns";
 import getCoverArt from "../utils/getCoverImage";
 import reduceText from "../utils/reduceText";
-// import { useRouter } from "next/navigation";
 
 export default function MangaCard({ props }: { props: Manga }) {
-  const { manga, setManga } = useMangaStore();
-  // const router = useRouter();
   return (
     <Link
       className="object-cover flex flex-col items-center"
       href={`/truyenqq/${props.id}`}
-      onClick={(event: any) => {
-        setManga(props);
-      }}
     >
       <div className="relative w-full">
         <div className="absolute flex w-full">
@@ -30,7 +23,6 @@ export default function MangaCard({ props }: { props: Manga }) {
             Hot
           </div>
         </div>
-        {/* <Image src={getCoverArt(props)} width={160} height={150} alt="thumbnail" /> */}
         <div className="w-full h-auto md:h-full aspect-[7/10]">
           <picture>
             <img

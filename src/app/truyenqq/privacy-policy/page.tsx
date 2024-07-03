@@ -117,7 +117,7 @@ export default function PrivacyPolicy() {
           <li>
             <div className="font-bold">Cách xoá dữ liệu của bạn:</div>
             <div>
-              &emsp;Vào phần quản lý thông tin tài khoản -&gt; xoá tài khoản.
+              &emsp;Vào phần quản lý thông tin tài khoản &#8594; xoá tài khoản.
             </div>
           </li>
         </ul>

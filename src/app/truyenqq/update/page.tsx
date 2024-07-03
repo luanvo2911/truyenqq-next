@@ -6,7 +6,7 @@ import MangaCard from "@/src/components/MangaCard";
 import { useState } from "react";
 import { useMangaList } from "@/src/hooks/useMangaList";
 import { Manga } from "@/src/api/schema";
-import { Pagination } from "antd";
+import { Pagination, Spin } from "antd";
 
 import _ from "lodash";
 
@@ -105,9 +105,13 @@ export default function Update() {
       </div>
       <div>
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 py-4 gap-4">
-          {mangaListResponse?.map((manga: Manga, index: number) => {
-            return <MangaCard key={index} props={manga} />;
-          })}
+          {mangaListLoading ? (
+            <Spin />
+          ) : (
+            mangaListResponse?.map((manga: Manga, index: number) => {
+              return <MangaCard key={index} props={manga} />;
+            })
+          )}
         </div>
       </div>
       <div className="flex items-center w-full justify-center">
@@ -115,7 +119,7 @@ export default function Update() {
           className="text-xl"
           current={pagination + 1}
           defaultPageSize={42}
-          total={42*200}
+          total={42 * 200}
           showSizeChanger={false}
           onChange={(page: number, pageSize: number) => {
             setPagination(page - 1);

@@ -1,5 +1,5 @@
 "use client";
-import { Tag } from "@/src/api/schema";
+import { Chapter, Tag } from "@/src/api/schema";
 import { useMangaInfo } from "@/src/hooks/useMangaList";
 import getCoverArt from "@/src/utils/getCoverImage";
 import {
@@ -18,12 +18,26 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Breadcrumb, Spin } from "antd";
 import _ from "lodash";
 import Link from "next/link";
+import useMangaStore from "@/src/store/manga";
+import { useEffect } from "react";
+import { statusTranslate } from "@/src/constants/translate";
+import getDateFns from "@/src/utils/dateFns";
+import { Nation } from "@/src/constants/nations";
+import Image from "next/image";
 
 export default function Page({ params }: { params: { slug: string } }) {
   // use router
-  // const { manga } = useMangaStore();
+  const { statistic, setStatistic, chapterList, setChapterList } =
+    useMangaStore();
   const { mangaResponse, error, isLoading } = useMangaInfo(params.slug);
-  console.log({ mangaResponse, error, isLoading });
+
+  useEffect(() => {
+    setStatistic(params.slug);
+    setChapterList(params.slug);
+  }, [params.slug, setStatistic, setChapterList]);
+
+  console.log(chapterList);
+
   return isLoading ? (
     <Spin />
   ) : (
@@ -44,7 +58,7 @@ export default function Page({ params }: { params: { slug: string } }) {
           <div className="w-auto h-[250px] aspect-[7/10]">
             <picture>
               <img
-                className="object-cover object-center w-full h-full"
+                className="object-cover object-center w-full h-full rounded-lg shadow-xl"
                 src={getCoverArt(mangaResponse)}
                 alt="thumbnail"
               />
@@ -68,15 +82,11 @@ export default function Page({ params }: { params: { slug: string } }) {
               </div>
               <div className="flex items-center gap-2">
                 <FontAwesomeIcon icon={faThumbsUp} />
-                <p>Lượt thích</p>
+                <p>Đánh giá</p>
               </div>
               <div className="flex items-center gap-2">
                 <FontAwesomeIcon icon={faHeart} />
                 <p>Lượt theo dõi</p>
-              </div>
-              <div className="flex items-center gap-2">
-                <FontAwesomeIcon icon={faEye} />
-                <p>Lượt xem</p>
               </div>
             </div>
             <div className="flex flex-col gap-2">
@@ -92,10 +102,16 @@ export default function Page({ params }: { params: { slug: string } }) {
                   );
                 })}
               </div>
-              <div>Ongoing</div>
-              <div>123</div>
-              <div>123</div>
-              <div>123</div>
+              <div>
+                {statusTranslate(
+                  _.get(mangaResponse, ["attributes", "status"])
+                )}
+              </div>
+              <div>
+                {statistic ? Math.round(statistic.rating.average) : "NaN"}/10
+              </div>
+              <div>{statistic ? statistic.follows : "NaN"}</div>
+              {/* <div>123</div> */}
             </div>
           </div>
           <div className="flex gap-2 flex-wrap items-center">
@@ -148,18 +164,59 @@ export default function Page({ params }: { params: { slug: string } }) {
             "Mô tả truyện đang được cập nhật. Theo dõi truyện tại truyenqq-next"}
         </div>
       </div>
-
       <div>
         <div className="flex gap-2 text-orange items-center text-xl">
           <FontAwesomeIcon icon={faDatabase} />
           <div>Danh sách chương</div>
         </div>
+        {chapterList && chapterList?.length > 0 ? (
+          <div className="shadow-xl border border-grey max-h-[50vh] overflow-y-scroll flex flex-col mt-2">
+            {chapterList.map((chapter: Chapter, index: number) => {
+              return (
+                <a
+                  href = {`/truyenqq/chapter/${_.get(chapter, "id")}`}
+                  className="flex justify-between hover:bg-grey p-2 mx-2"
+                  key={_.get(chapter, "id") ?? index}
+                >
+                  <div className="flex gap-4 items-center">
+                    <div>
+                      Chapter {_.get(chapter, ["attributes", "chapter"])}
+                    </div>
+                    <div>
+                      <Image
+                        width={20}
+                        height={20}
+                        src={_.get(
+                          Nation,
+                          _.get(chapter, ["attributes", "translatedLanguage"])
+                        )}
+                        alt={`${_.get(chapter, [
+                          "attributes",
+                          "translatedLanguage",
+                        ])} flag`}
+                      />
+                    </div>
+                  </div>
+                  <div>
+                    {getDateFns(_.get(chapter, ["attributes", "readableAt"]))}
+                  </div>
+                </a>
+              );
+            })}
+          </div>
+        ) : (
+          <div>
+            Danh sách chương đang được cập nhật nhanh nhất tại truyenqq-next
+          </div>
+        )}
       </div>
 
       <div>
         <div className="flex gap-2 text-orange items-center text-xl">
           <FontAwesomeIcon icon={faComments} />
-          <div>Bình luận</div>
+          <div>
+            Bình luận ({statistic ? statistic.comments?.repliesCount : "0"})
+          </div>
         </div>
       </div>
     </div>

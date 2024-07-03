@@ -9,14 +9,13 @@ import { MangaListResponse, MangaResponse, TagResponse } from "./schema";
  */
 
 export const getMangaTag = (path: string) => {
-  return instance(path, {}).get<TagResponse>("/");
+  return instance(path, "get");
 };
 
 export const getMangaList = ([path, query]: [path: string, query: Object]) => {
-  return instance(path, query).get<MangaListResponse>("/");
+  return instance(path, "get", query);
 };
 
-
 export const getManga = ([path, query]: [path: string, query: Object]) => {
-  return instance(path, query).get<MangaResponse>("/");
+  return instance(path, "get", query);
 };

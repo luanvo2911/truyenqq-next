@@ -67,4 +67,6 @@ const useMangaInfo = (id: string) => {
   return { mangaResponse, error, isLoading };
 };
 
+
+
 export { useSpotlightList, useMangaList, useMangaInfo };

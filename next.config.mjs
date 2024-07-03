@@ -1,14 +1,10 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  env: {
+    PROD: process.env.NEXT_PUBLIC_PROD
+  },
   images: {
-    remotePatterns: [
-      {
-        protocol: "https",
-        hostname: "*.mangadex.org",
-        port: "",
-        pathname: "/covers/**",
-      },
-    ],
+    domains: ["uploads.mangadex.org"]
   },
   async headers() {
     return [

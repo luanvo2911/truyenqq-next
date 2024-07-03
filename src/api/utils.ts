@@ -31,18 +31,20 @@ const stringifyQuery = (query: { [key: string]: any }) => {
       }
     });
   }
-  console.log(qs.length ? `?${qs.join("&")}` : "");
   return qs.length ? `?${qs.join("&")}` : "";
 };
 
-export const instance = (path: string, query: Object) =>
-  axios.create({
-    baseURL: PROXY_SERVER_API,
+
+export const instance = async (url: string, method: string, query?: Object) => {
+  return axios({
+    method: method,
+    url: process.env.NEXT_PUBLIC_PROD === 'dev' ? API_ENDPOINT + url + (query ? stringifyQuery(query): "") : PROXY_SERVER_API,
     headers: {
       "Access-Control-Allow-Origin": "*",
       "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
       "Access-Control-Allow-Credentials": "true",
       "Access-Control-Allow-Headers": "*",
-      "Target-URL": API_ENDPOINT + path + stringifyQuery(query),
-    },
-  });
+      "Target-URL": process.env.NEXT_PUBLIC_PROD === 'dev' ? "" : API_ENDPOINT + url + (query ? stringifyQuery(query): "")
+    }
+  })
+}

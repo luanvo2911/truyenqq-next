@@ -1,6 +1,6 @@
 import { Status } from "../api/static";
 
-const statusTranslate = (status: string) => {
+export const statusTranslate = (status: string) => {
   switch (status) {
     case Status.CANCELLED:
       return "Hủy";

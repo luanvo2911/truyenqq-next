@@ -106,3 +106,59 @@ export interface CoverArt {
     fileName: string;
   };
 }
+
+export interface StatisticsResponse {
+  result: string;
+  statistics: Record<string, Statistic>;
+}
+
+export interface Statistic {
+  comments: {
+    threadId: number;
+    repliesCount: number;
+  } | null;
+  rating: {
+    average: number;
+    bayesian: number;
+  };
+  follows: number;
+}
+
+export interface MangaFeedResponse {
+  result: string;
+  response: string;
+  data: Chapter[];
+}
+
+export interface Chapter {
+  id: string;
+  type: string;
+  attributes: ChapterAttributes;
+}
+
+export interface ChapterAttributes {
+  volume: number | null;
+  chapter: number | null;
+  title: number | null;
+  translatedLanguage: string;
+  externalUrl: string | null;
+  publishAt: string;
+  readableAt: string;
+  createdAt: string;
+  updatedAt: string;
+  pages: number;
+  version: number;
+  relationships: any;
+}
+
+export interface ChapterImageResponse {
+  result: string;
+  baseUrl: string;
+  chapter: ChapterImage;
+}
+
+export interface ChapterImage {
+  hash: string;
+  data: string[];
+  dataSaver: string[];
+}

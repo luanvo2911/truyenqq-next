@@ -6,10 +6,13 @@ const getDateFns = (date: string) => {
   });
   return distance
     .replace("about", "")
+    .replace("almost", "")
+    .replace("over", "")
     .replace(RegExp("minute[s]* ago"), "phút trước")
     .replace(RegExp("hour[s]* ago"), "giờ trước")
     .replace(RegExp("day[s]* ago"), "ngày trước")
-    .replace(RegExp("month[s]* ago"), "tháng trước");
+    .replace(RegExp("month[s]* ago"), "tháng trước")
+    .replace(RegExp("year[s]* ago"), "năm trước");
 };
 
 export default getDateFns;
