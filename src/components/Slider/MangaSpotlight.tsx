@@ -1,6 +1,5 @@
 import { Author, Manga } from "@/src/api/schema";
 import useIsMobile from "@/src/hooks/useIsMobile";
-import useMangaStore from "@/src/store/manga";
 import getDateFns from "@/src/utils/dateFns";
 import getCoverArt from "@/src/utils/getCoverImage";
 import reduceText from "@/src/utils/reduceText";
@@ -9,14 +8,10 @@ import Link from "next/link";
 
 export const MangaSpotlight = ({ props }: { props: Manga }) => {
   const isMobile = useIsMobile();
-  const { manga, setManga } = useMangaStore();
   return (
     <Link
       className="relative w-full h-full"
       href={`/truyenqq/${props.id}`}
-      onClick={(event: any) => {
-        setManga(props);
-      }}
     >
       <div className="w-[calc(100vw-1rem)] xl:w-[calc(100vw-20rem)] h-[calc(160px+2rem)] md:h-[calc(225px+4rem)] opacity-50 -translate-y-24">
         <picture>
