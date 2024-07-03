@@ -56,13 +56,13 @@ export default function Page({ params }: { params: { slug: string } }) {
       <div className="flex flex-col xl:flex-row justify-center xl:justify-start w-full gap-8">
         <div className="flex items-center justify-center">
           <div className="w-auto h-[250px] aspect-[7/10]">
-            <picture>
-              <img
-                className="object-cover object-center w-full h-full rounded-lg shadow-xl"
-                src={getCoverArt(mangaResponse)}
-                alt="thumbnail"
-              />
-            </picture>
+            <Image
+              className="object-cover object-center w-full h-full rounded-lg shadow-xl"
+              src={getCoverArt(mangaResponse)}
+              width={640}
+              height={957}
+              alt="thumnail"
+            />
           </div>
         </div>
         <div className="flex flex-col gap-4">
@@ -174,7 +174,7 @@ export default function Page({ params }: { params: { slug: string } }) {
             {chapterList.map((chapter: Chapter, index: number) => {
               return (
                 <a
-                  href = {`/truyenqq/chapter/${_.get(chapter, "id")}`}
+                  href={`/truyenqq/chapter/${_.get(chapter, "id")}`}
                   className="flex justify-between hover:bg-grey p-2 mx-2"
                   key={_.get(chapter, "id") ?? index}
                 >

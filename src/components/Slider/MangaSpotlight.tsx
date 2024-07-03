@@ -4,34 +4,28 @@ import getDateFns from "@/src/utils/dateFns";
 import getCoverArt from "@/src/utils/getCoverImage";
 import reduceText from "@/src/utils/reduceText";
 import _ from "lodash";
+import Image from "next/image";
 import Link from "next/link";
 
 export const MangaSpotlight = ({ props }: { props: Manga }) => {
   const isMobile = useIsMobile();
   return (
-    <Link
-      className="relative w-full h-full"
-      href={`/truyenqq/${props.id}`}
-    >
+    <Link className="relative w-full h-full" href={`/truyenqq/${props.id}`}>
       <div className="w-[calc(100vw-1rem)] xl:w-[calc(100vw-20rem)] h-[calc(160px+2rem)] md:h-[calc(225px+4rem)] opacity-50 -translate-y-24">
-        <picture>
-          <img
-            className="w-full h-auto object-cover"
-            src={getCoverArt(props)}
-            alt="thumbnail"
-          />
-        </picture>
+        <Image
+          className="w-full h-auto object-cover"
+          src={getCoverArt(props)}
+          alt="thumbnail"
+          width={400}
+          height={400}
+        />
       </div>
       <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-white/[.2] to-white/[.8] flex">
         <div className=" flex gap-4 p-4 items-stretch">
           <div className="w-auto h-40 md:h-full aspect-[7/10]">
-            <picture>
-              <img
-                className="object-cover object-center w-full h-full"
+            <Image className="object-cover object-center w-full h-full"
                 src={getCoverArt(props)}
-                alt="thumbnail"
-              />
-            </picture>
+                alt="thumbnail" height = {400} width = {400}/>
           </div>
           <div className="flex flex-col justify-between h-40 md:h-full">
             <div className="flex flex-col gap-1">

@@ -1,12 +1,12 @@
 "use client";
 
-
 import _ from "lodash";
 import Link from "next/link";
 import { Manga } from "../api/schema";
 import getDateFns from "../utils/dateFns";
 import getCoverArt from "../utils/getCoverImage";
 import reduceText from "../utils/reduceText";
+import Image from "next/image";
 
 export default function MangaCard({ props }: { props: Manga }) {
   return (
@@ -24,14 +24,13 @@ export default function MangaCard({ props }: { props: Manga }) {
           </div>
         </div>
         <div className="w-full h-auto md:h-full aspect-[7/10]">
-          <picture>
-            <img
-              loading="lazy"
-              className="object-cover object-center w-full h-full"
-              src={getCoverArt(props)}
-              alt="thumbnail"
-            />
-          </picture>
+          <Image
+            className="object-cover object-center w-full h-full"
+            src={getCoverArt(props)}
+            alt="thumbnail"
+            width={640}
+            height={957}
+          />
         </div>
       </div>
       <div className="font-bold text-base text-center">
