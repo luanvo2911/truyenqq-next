@@ -43,7 +43,7 @@ export const instance = async (url: string, method: string, query?: Object) => {
   return axios({
     method: method,
     // url: process.env.NEXT_PUBLIC_PROD === 'dev' ? API_ENDPOINT + url + (query ? stringifyQuery(query): "") : PROXY_SERVER_API,
-    url: ("https://truyenqq-proxy.vercel.app/api" + url + (query ? stringifyQuery(query): "")),
+    url: ("https://truyenqq-next.vercel.app/api" + url + (query ? stringifyQuery(query): "")),
     headers: {
       "Access-Control-Allow-Origin": "*",
       "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
