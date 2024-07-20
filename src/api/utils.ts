@@ -39,7 +39,7 @@ export const getStaticProps = async () => {
 }
 
 export const instance = async (url: string, method: string, query?: Object) => {
-  console.log(url + (query ? stringifyQuery(query): ""))
+  // console.log("http://localhost:3000/api/" + url + (query ? stringifyQuery(query): ""))
   return axios({
     method: method,
     // url: process.env.NEXT_PUBLIC_PROD === 'dev' ? API_ENDPOINT + url + (query ? stringifyQuery(query): "") : PROXY_SERVER_API,
@@ -53,3 +53,4 @@ export const instance = async (url: string, method: string, query?: Object) => {
     }
   })
 }
+//https://truyenqq-next.vercel.app/api
