@@ -130,6 +130,12 @@ export interface MangaFeedResponse {
   data: Chapter[];
 }
 
+export interface ChapterInfoResponse{
+  result: string;
+  response: string;
+  data: Chapter;
+}
+
 export interface Chapter {
   id: string;
   type: string;

@@ -25,18 +25,17 @@ import getDateFns from "@/src/utils/dateFns";
 import { Nation } from "@/src/constants/nations";
 import Image from "next/image";
 
-export default function Page({ params }: { params: { slug: string } }) {
+export default function Slug({ params }: { params: { slug: string[] } }) {
   // use router
-  const { statistic, setStatistic, chapterList, setChapterList } =
+  const { statistic, setStatistic, chapterList, setChapterList, setTitle } =
     useMangaStore();
-  const { mangaResponse, error, isLoading } = useMangaInfo(params.slug);
+  const { mangaResponse, error, isLoading } = useMangaInfo(params.slug[0]);
+  console.log(params.slug)
 
   useEffect(() => {
-    setStatistic(params.slug);
-    setChapterList(params.slug);
+    setStatistic(params.slug[0]);
+    setChapterList(params.slug[0]);
   }, [params.slug, setStatistic, setChapterList]);
-
-  console.log(chapterList);
 
   return isLoading ? (
     <Spin />
@@ -49,7 +48,11 @@ export default function Page({ params }: { params: { slug: string } }) {
           {
             title:
               _.get(mangaResponse, ["attributes", "altTitles", "0", "vi"]) ??
-              _.get(mangaResponse, ["attributes", "title", "en"]),
+              _.get(mangaResponse, [
+                "attributes",
+                "title",
+                Object.keys(mangaResponse.attributes.title)[0],
+              ]),
           },
         ]}
       />
@@ -62,13 +65,18 @@ export default function Page({ params }: { params: { slug: string } }) {
               width={640}
               height={957}
               alt="thumnail"
+              priority={true}
             />
           </div>
         </div>
         <div className="flex flex-col gap-4">
           <div className="text-xl font-semibold">
             {_.get(mangaResponse, ["attributes", "altTitles", "0", "vi"]) ??
-              _.get(mangaResponse, ["attributes", "title", "en"])}
+              _.get(mangaResponse, [
+                "attributes",
+                "title",
+                Object.keys(mangaResponse.attributes.title)[0],
+              ])}
           </div>
           <div className="flex gap-4">
             <div className="flex flex-col gap-2">
@@ -134,10 +142,13 @@ export default function Page({ params }: { params: { slug: string } }) {
             )}
           </div>
           <div className="grid grid-cols-2 xl:grid-cols-4 gap-2 w-auto">
-            <div className="bg-green flex gap-2 items-center text-lg justify-center p-2 text-white rounded-xl">
+            <a
+              className="bg-green flex gap-2 items-center text-lg justify-center p-2 text-white rounded-xl"
+              href={`/truyenqq/chapter/${_.get(chapterList[0], "id")}`}
+            >
               <FontAwesomeIcon icon={faBook} />
               <div>Đọc từ đầu</div>
-            </div>
+            </a>
             <div className="bg-red flex gap-2 items-center text-lg justify-center p-2 text-white rounded-xl">
               <FontAwesomeIcon icon={faHeart} />
               <div>Theo dõi</div>
@@ -194,6 +205,7 @@ export default function Page({ params }: { params: { slug: string } }) {
                           "attributes",
                           "translatedLanguage",
                         ])} flag`}
+                        priority={true}
                       />
                     </div>
                   </div>

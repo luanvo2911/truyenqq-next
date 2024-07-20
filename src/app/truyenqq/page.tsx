@@ -22,8 +22,6 @@ export default function Truyenqq() {
     limit: 42,
     offset: 0,
   });
-  console.log({ spotLightResponse, spotLightListError, spotLightListLoading });
-  console.log({ mangaListResponse, mangaListError, mangaListLoading });
   return (
     <div className="w-full h-auto px-2 xl:px-40 py-4">
       <div>

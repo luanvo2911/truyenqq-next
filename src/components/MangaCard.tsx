@@ -12,7 +12,14 @@ export default function MangaCard({ props }: { props: Manga }) {
   return (
     <Link
       className="object-cover flex flex-col items-center"
-      href={`/truyenqq/${props.id}`}
+      href={`/truyenqq/${props.id}/${
+        (_.get(props, ["attributes", "altTitles", "0", "vi"]) ??
+        _.get(props, [
+          "attributes",
+          "title",
+          Object.keys(props.attributes.title)[0],
+        ])).replaceAll(" ", "-")
+      }`}
     >
       <div className="relative w-full">
         <div className="absolute flex w-full">
@@ -30,13 +37,18 @@ export default function MangaCard({ props }: { props: Manga }) {
             alt="thumbnail"
             width={640}
             height={957}
+            priority={true}
           />
         </div>
       </div>
       <div className="font-bold text-base text-center">
         {reduceText(
           _.get(props, ["attributes", "altTitles", "0", "vi"]) ??
-            _.get(props, ["attributes", "title", "en"]),
+            _.get(props, [
+              "attributes",
+              "title",
+              Object.keys(props.attributes.title)[0],
+            ]),
           25
         )}
       </div>

@@ -12,18 +12,22 @@ export default function Footer() {
         <div>
           <Link href="/truyenqq">
             <Image
+              priority={true}
               src={logoPC}
               width={150}
               height={150}
               alt="logoPC"
+              className="object-cover object-center w-[150px] h-auto"
             />
           </Link>
           <div>
             <Image
+              priority={true}
               src={footer}
               width={350}
               height={150}
               alt="fanpage"
+              className="object-cover object-center w-[350px] h-auto"
             />
           </div>
         </div>

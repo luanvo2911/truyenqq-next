@@ -6,11 +6,18 @@ export const getChapterList = (uuid: string) => {
     order: {
       chapter: "desc",
     },
-    limit: 500
+    limit: 500,
   });
 };
 
 export const getChapterImage = (uuid: string) => {
   const path = `/at-home/server/${uuid}`;
   return instance(path, "get");
+};
+
+export const getChapterInfo = (chapterUuid: string) => {
+  const path = `/chapter/${chapterUuid}`;
+  return instance(path, "get", {
+    "includes[]": ["manga", "user"],
+  });
 };

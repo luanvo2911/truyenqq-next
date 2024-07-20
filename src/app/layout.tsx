@@ -4,6 +4,7 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Suspense } from "react";
 import Loading from "./loading";
 import "./globals.css";
+import useMangaStore from "../store/manga";
 
 const quicksand = Quicksand({
   weight: ["300", "400", "500", "600", "700"],

@@ -13,6 +13,7 @@ import Image from "next/image";
 import Link from "next/link";
 import useIsMobile from "../hooks/useIsMobile";
 import useToggle from "../hooks/useToggle";
+import { useState, useEffect } from "react";
 
 export default function NavBar() {
   const isMobile = useIsMobile();
@@ -20,7 +21,14 @@ export default function NavBar() {
   const handleClick = () => {
     setToggle(!toggle);
   };
+  const [searchKey, setSearchKey] = useState("");
+  useEffect(() => {
+    const delayFn = setTimeout(() => {
+      console.log(`fetch api to search ${searchKey}`);
+    }, 2000);
 
+    return () => clearTimeout(delayFn);
+  }, [searchKey]);
   return (
     <div className="w-screen min-h-[100px]">
       <div className="max-w-full flex justify-between items-center px-2 xl:px-40 pt-4">
@@ -31,6 +39,7 @@ export default function NavBar() {
               width={isMobile ? 30 : 150}
               height={isMobile ? 30 : 150}
               alt="Logo icon for PC"
+              className={`object-cover object-center w-[${isMobile ? '30px' : '150px'}] h-auto`}
             />
           </Link>
           <div className="border-2 border-orange w-[40px] h-[40px] rounded-full flex items-center justify-center hover:cursor-pointer">
@@ -39,15 +48,31 @@ export default function NavBar() {
           {isMobile ? (
             <div />
           ) : (
-            <div className="relative">
-              <input
-                className="px-4 py-2 w-[400px] border-2 border-orange rounded-[24px] focus:outline-none"
-                placeholder="Bạn muốn tìm truyện gì"
-              />
-              <FontAwesomeIcon
-                className="absolute right-3 top-3 text-orange"
-                icon={faSearch}
-              />
+            <div className="flex flex-col">
+              <div className="relative">
+                <input
+                  className="px-4 py-2 w-[400px] border-2 border-orange rounded-[24px] focus:outline-none"
+                  placeholder="Bạn muốn tìm truyện gì"
+                  value={searchKey}
+                  onChange={(e) => {
+                    setSearchKey(e.target.value);
+                  }}
+                />
+                <FontAwesomeIcon
+                  className="absolute right-3 top-3 text-orange"
+                  icon={faSearch}
+                />
+                {searchKey !== "" ? (
+                  <div className="bg-white absolute top-11 w-[400px]">
+                    <div>Result 1</div>
+                    <div>Result 2</div>
+                    <div>Result 3</div>
+                    <div>Result 4</div>
+                  </div>
+                ) : (
+                  ""
+                )}
+              </div>
             </div>
           )}
         </div>

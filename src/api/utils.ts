@@ -34,11 +34,16 @@ const stringifyQuery = (query: { [key: string]: any }) => {
   return qs.length ? `?${qs.join("&")}` : "";
 };
 
+export const getStaticProps = async () => {
+
+}
 
 export const instance = async (url: string, method: string, query?: Object) => {
+  console.log(url + (query ? stringifyQuery(query): ""))
   return axios({
     method: method,
-    url: process.env.NEXT_PUBLIC_PROD === 'dev' ? API_ENDPOINT + url + (query ? stringifyQuery(query): "") : PROXY_SERVER_API,
+    // url: process.env.NEXT_PUBLIC_PROD === 'dev' ? API_ENDPOINT + url + (query ? stringifyQuery(query): "") : PROXY_SERVER_API,
+    url: ("https://truyenqq-proxy.vercel.app/api" + url + (query ? stringifyQuery(query): "")),
     headers: {
       "Access-Control-Allow-Origin": "*",
       "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",

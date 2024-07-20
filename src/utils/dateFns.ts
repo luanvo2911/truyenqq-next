@@ -15,4 +15,10 @@ const getDateFns = (date: string) => {
     .replace(RegExp("year[s]* ago"), "năm trước");
 };
 
+export const getDateString = (date: string) => {
+
+  const newDate = new Date(date);
+  return newDate.getHours() + ":" + newDate.getMinutes() + " " + newDate.toLocaleDateString('en-GB');
+}
+
 export default getDateFns;
