@@ -1,12 +1,15 @@
 "use client";
 import { Chapter, Tag } from "@/src/api/schema";
-import { useMangaInfo } from "@/src/hooks/useMangaList";
+import { Nation } from "@/src/constants/nations";
+import { statusTranslate } from "@/src/constants/translate";
+import { useMangaInfo } from "@/src/hooks/useManga";
+import useMangaStore from "@/src/store/manga";
+import getDateFns from "@/src/utils/dateFns";
 import getCoverArt from "@/src/utils/getCoverImage";
 import {
   faBook,
   faComments,
   faDatabase,
-  faEye,
   faHeart,
   faInfoCircle,
   faLocationArrow,
@@ -17,20 +20,15 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Breadcrumb, Spin } from "antd";
 import _ from "lodash";
-import Link from "next/link";
-import useMangaStore from "@/src/store/manga";
-import { useEffect } from "react";
-import { statusTranslate } from "@/src/constants/translate";
-import getDateFns from "@/src/utils/dateFns";
-import { Nation } from "@/src/constants/nations";
 import Image from "next/image";
+import Link from "next/link";
+import { useEffect } from "react";
 
 export default function Slug({ params }: { params: { slug: string[] } }) {
   // use router
   const { statistic, setStatistic, chapterList, setChapterList, setTitle } =
     useMangaStore();
   const { mangaResponse, error, isLoading } = useMangaInfo(params.slug[0]);
-  console.log(params.slug)
 
   useEffect(() => {
     setStatistic(params.slug[0]);
@@ -227,7 +225,8 @@ export default function Slug({ params }: { params: { slug: string[] } }) {
         <div className="flex gap-2 text-orange items-center text-xl">
           <FontAwesomeIcon icon={faComments} />
           <div>
-            Bình luận ({statistic ? statistic.comments?.repliesCount : "0"})
+            Bình luận (
+            {statistic ? statistic.comments?.repliesCount ?? "0" : "0"})
           </div>
         </div>
       </div>

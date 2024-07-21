@@ -37,6 +37,7 @@ const useMangaStore = create<{
         chapterList: _.get(res, ["data", "data"]),
       }));
     });
+    
   },
   setStatistic: (id: string) => {
     getMangaStat(id).then((res: StatisticsResponse | any) => {

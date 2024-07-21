@@ -1,9 +1,5 @@
 import axios from "axios";
 
-const API_ENDPOINT = "https://api.mangadex.org";
-
-const PROXY_SERVER_API = "http://localhost:8080";
-
 const stringifyArrayQuery = (name: string, array?: string[]) => {
   let qs = "";
 
@@ -34,23 +30,16 @@ const stringifyQuery = (query: { [key: string]: any }) => {
   return qs.length ? `?${qs.join("&")}` : "";
 };
 
-export const getStaticProps = async () => {
-
-}
 
 export const instance = async (url: string, method: string, query?: Object) => {
-  // console.log("http://localhost:3000/api/" + url + (query ? stringifyQuery(query): ""))
   return axios({
     method: method,
-    // url: process.env.NEXT_PUBLIC_PROD === 'dev' ? API_ENDPOINT + url + (query ? stringifyQuery(query): "") : PROXY_SERVER_API,
-    url: ("https://truyenqq-next.vercel.app/api" + url + (query ? stringifyQuery(query): "")),
+    url: (process.env.NEXT_PUBLIC_API_DEV + url + (query ? stringifyQuery(query): "")),
     headers: {
       "Access-Control-Allow-Origin": "*",
       "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
       "Access-Control-Allow-Credentials": "true",
       "Access-Control-Allow-Headers": "*",
-      "Target-URL": process.env.NEXT_PUBLIC_PROD === 'dev' ? "" : API_ENDPOINT + url + (query ? stringifyQuery(query): "")
     }
   })
 }
-//https://truyenqq-next.vercel.app/api

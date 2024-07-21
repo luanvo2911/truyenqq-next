@@ -1,8 +1,8 @@
 "use client";
 
 import useSWR from "swr";
-import { Manga } from "../api";
-import { MangaResponse, MangaListResponse } from "../api/schema";
+import { MangaAPI } from "../api";
+import { MangaListResponse, MangaResponse } from "../api/schema";
 
 const useSpotlightList = ({ limit, offset }: { limit: number; offset: number }) => {
   const { data, error, isLoading } = useSWR(
@@ -17,7 +17,7 @@ const useSpotlightList = ({ limit, offset }: { limit: number; offset: number }) 
       },
       // "contentRating[]=suggestive&includes[]=cover_art&includes[]=author&order[updatedAt]=desc"
     ],
-    Manga.getMangaList
+    MangaAPI.getMangaList
   );
 
   const spotLightResponse = 
@@ -29,7 +29,7 @@ const useSpotlightList = ({ limit, offset }: { limit: number; offset: number }) 
   return { spotLightResponse, spotLightListError, spotLightListLoading };
 };
 
-const useMangaList = ({ limit, offset }: { limit: number; offset: number }) => {
+const useManga = ({ limit, offset }: { limit: number; offset: number }) => {
   const { data, error, isLoading } = useSWR(
     [
       "/manga",
@@ -41,7 +41,7 @@ const useMangaList = ({ limit, offset }: { limit: number; offset: number }) => {
       },
       // `includes[]=cover_art&includes[]=author&order[updatedAt]=desc&offset=${offset}&limit=${limit}`
     ],
-    Manga.getMangaList
+    MangaAPI.getMangaList
   );
   const mangaListResponse =
     data && data.data && (data.data as MangaListResponse).data;
@@ -60,13 +60,29 @@ const useMangaInfo = (id: string) => {
         "includes[]": ["cover_art", "author"],
       },
     ],
-    Manga.getManga
+    MangaAPI.getManga
   );
   const mangaResponse = data && data.data && (data.data as MangaResponse).data;
 
   return { mangaResponse, error, isLoading };
 };
 
+const useMangaSearch = (keyword: string) => {
+  const { data, error, isLoading } = useSWR(
+    [
+      '/manga',
+      {
+        title: keyword
+      }
+    ],
+    MangaAPI.getManga
+  )
+
+  const mangaResponse = data && data.data && (data.data as MangaResponse).data;
+
+  return { mangaResponse, error, isLoading };
+}
 
 
-export { useSpotlightList, useMangaList, useMangaInfo };
+export { useManga, useMangaInfo, useSpotlightList, useMangaSearch };
+

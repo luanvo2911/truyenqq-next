@@ -13,7 +13,11 @@ import Image from "next/image";
 import Link from "next/link";
 import useIsMobile from "../hooks/useIsMobile";
 import useToggle from "../hooks/useToggle";
+import { MangaAPI } from "../api";
+import { Manga } from "@/src/api/schema";
 import { useState, useEffect } from "react";
+import MangaSearchCard from "./MangaSearchCard";
+import { Spin } from "antd";
 
 export default function NavBar() {
   const isMobile = useIsMobile();
@@ -22,9 +26,21 @@ export default function NavBar() {
     setToggle(!toggle);
   };
   const [searchKey, setSearchKey] = useState("");
+  const [searchResult, setSearchResult] = useState<Manga[] | null>(null);
   useEffect(() => {
     const delayFn = setTimeout(() => {
-      console.log(`fetch api to search ${searchKey}`);
+      if (searchKey !== "") {
+        MangaAPI.getManga([
+          "/manga",
+          {
+            title: searchKey,
+            "includes[]": ["cover_art", "author"],
+            limit: 10,
+          },
+        ]).then((result) => {
+          setSearchResult(result.data?.data);
+        });
+      }
     }, 2000);
 
     return () => clearTimeout(delayFn);
@@ -39,7 +55,9 @@ export default function NavBar() {
               width={isMobile ? 30 : 150}
               height={isMobile ? 30 : 150}
               alt="Logo icon for PC"
-              className={`object-cover object-center w-[${isMobile ? '30px' : '150px'}] h-auto`}
+              className={`object-cover object-center w-[${
+                isMobile ? "30px" : "150px"
+              }] h-auto`}
             />
           </Link>
           <div className="border-2 border-orange w-[40px] h-[40px] rounded-full flex items-center justify-center hover:cursor-pointer">
@@ -63,11 +81,17 @@ export default function NavBar() {
                   icon={faSearch}
                 />
                 {searchKey !== "" ? (
-                  <div className="bg-white absolute top-11 w-[400px]">
-                    <div>Result 1</div>
-                    <div>Result 2</div>
-                    <div>Result 3</div>
-                    <div>Result 4</div>
+                  <div className="bg-white absolute top-11 w-[400px] z-20 rounded-t-[24px] max-h-[40vh] overflow-y-scroll">
+                    {searchResult ? (
+                      searchResult.map((item, index) => {
+                        return <MangaSearchCard key={index} manga={item} />;
+                      })
+                    ) : (
+                      <div className="flex gap-4 justify-center items-center p-4">
+                        <div>Loading ...</div>
+                        <Spin />
+                      </div>
+                    )}
                   </div>
                 ) : (
                   ""

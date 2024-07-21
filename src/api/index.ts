@@ -1,1 +1,1 @@
-export * as Manga from './manga';
+export * as MangaAPI from './manga';

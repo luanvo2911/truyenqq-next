@@ -1,5 +1,5 @@
 import useSWR from "swr";
-import { Manga } from "../api";
+import { MangaAPI } from "../api";
 
 const useAggregate = () => {};
 

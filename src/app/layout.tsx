@@ -9,6 +9,7 @@ import useMangaStore from "../store/manga";
 const quicksand = Quicksand({
   weight: ["300", "400", "500", "600", "700"],
   subsets: ["latin"],
+  preload: false
 });
 
 export const metadata: Metadata = {

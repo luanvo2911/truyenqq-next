@@ -7,6 +7,7 @@ export const getChapterList = (uuid: string) => {
       chapter: "desc",
     },
     limit: 500,
+    // "translatedLanguage[]": ["vi"]
   });
 };
 

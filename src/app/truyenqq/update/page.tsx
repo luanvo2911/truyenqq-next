@@ -1,12 +1,12 @@
 "use client";
 
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faFlag } from "@fortawesome/free-solid-svg-icons";
-import MangaCard from "@/src/components/MangaCard";
-import { useState } from "react";
-import { useMangaList } from "@/src/hooks/useMangaList";
 import { Manga } from "@/src/api/schema";
+import MangaCard from "@/src/components/MangaCard";
+import { useManga } from "@/src/hooks/useManga";
+import { faFlag } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Pagination, Spin } from "antd";
+import { useState } from "react";
 
 import _ from "lodash";
 
@@ -19,7 +19,7 @@ export default function Update() {
   const updateState = ["Đang tiến hành", "Hoàn thành"];
   const country = ["Trung Quốc", "Việt Nam", "Hàn Quốc", "Nhật Bản", "Mỹ"];
   const [pagination, setPagination] = useState(0);
-  const { mangaListResponse, mangaListError, mangaListLoading } = useMangaList({
+  const { mangaListResponse, mangaListError, mangaListLoading } = useManga({
     limit: 42,
     offset: pagination * 42,
   });

@@ -9,7 +9,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Spin } from "antd";
 import Link from "next/link";
 
-import { useMangaList, useSpotlightList } from "@/src/hooks/useMangaList";
+import { useManga, useSpotlightList } from "@/src/hooks/useManga";
 
 // max manga card = 6col * 7 row
 
@@ -18,7 +18,7 @@ export default function Truyenqq() {
     limit: 10,
     offset: 0
   });
-  const { mangaListResponse, mangaListError, mangaListLoading } = useMangaList({
+  const { mangaListResponse, mangaListError, mangaListLoading } = useManga({
     limit: 42,
     offset: 0,
   });

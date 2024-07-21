@@ -7,6 +7,7 @@ import _ from "lodash";
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect } from "react";
+import { Tag } from "antd";
 
 export const MangaSpotlight = ({ props }: { props: Manga }) => {
   const isMobile = useIsMobile();
@@ -76,16 +77,16 @@ export const MangaSpotlight = ({ props }: { props: Manga }) => {
                       .slice(0, 3)
                       .map((tag, index) => {
                         return (
-                          <div key={index} className="bg-grey p-2 text-xs">
+                          <Tag key={index} className="bg-grey">
                             {_.get(tag, ["attributes", "name", "en"])}
-                          </div>
+                          </Tag>
                         );
                       })
                   : _.get(props, ["attributes", "tags"]).map((tag, index) => {
                       return (
-                        <div key={index} className="bg-grey p-2 text-xs">
+                        <Tag key={index} className="bg-grey">
                           {_.get(tag, ["attributes", "name", "en"])}
-                        </div>
+                        </Tag>
                       );
                     })}
               </div>
