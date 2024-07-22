@@ -34,7 +34,7 @@ const stringifyQuery = (query: { [key: string]: any }) => {
 export const instance = async (url: string, method: string, query?: Object) => {
   return axios({
     method: method,
-    url: (process.env.NEXT_PUBLIC_API_DEV + url + (query ? stringifyQuery(query): "")),
+    url: (process.env.NEXT_PUBLIC_API_PRODUCTION + url + (query ? stringifyQuery(query): "")),
     headers: {
       "Access-Control-Allow-Origin": "*",
       "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
