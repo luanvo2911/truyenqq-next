@@ -12,6 +12,7 @@ export default function Footer() {
         <div>
           <Link href="/truyenqq">
             <Image
+              unoptimized
               priority={true}
               src={logoPC}
               width={150}
@@ -22,6 +23,7 @@ export default function Footer() {
           </Link>
           <div>
             <Image
+              unoptimized
               priority={true}
               src={footer}
               width={350}

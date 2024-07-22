@@ -1,25 +1,25 @@
 "use client";
 
 import _ from "lodash";
+import Image from "next/image";
 import Link from "next/link";
 import { Manga } from "../api/schema";
 import getDateFns from "../utils/dateFns";
 import getCoverArt from "../utils/getCoverImage";
 import reduceText from "../utils/reduceText";
-import Image from "next/image";
 
 export default function MangaCard({ props }: { props: Manga }) {
   return (
     <Link
       className="object-cover flex flex-col items-center"
-      href={`/truyenqq/${props.id}/${
-        (_.get(props, ["attributes", "altTitles", "0", "vi"]) ??
+      href={`/truyenqq/${props.id}/${(
+        _.get(props, ["attributes", "altTitles", "0", "vi"]) ??
         _.get(props, [
           "attributes",
           "title",
           Object.keys(props.attributes.title)[0],
-        ])).replaceAll(" ", "-")
-      }`}
+        ])
+      ).replaceAll(" ", "-")}`}
     >
       <div className="relative w-full">
         <div className="absolute flex w-full">
@@ -32,6 +32,7 @@ export default function MangaCard({ props }: { props: Manga }) {
         </div>
         <div className="w-full h-auto md:h-full aspect-[7/10]">
           <Image
+            unoptimized
             className="object-cover object-center w-full h-full"
             src={getCoverArt(props)}
             alt="thumbnail"

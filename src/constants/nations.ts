@@ -11,6 +11,7 @@ import ID from "@/public/static/nations/id.svg";
 import IT from "@/public/static/nations/it.svg";
 import JP from "@/public/static/nations/jp.svg";
 import KO from "@/public/static/nations/ko.svg";
+import MS from "@/public/static/nations/ms.svg"
 import MY from "@/public/static/nations/my.svg";
 import PL from "@/public/static/nations/pl.svg";
 import RU from "@/public/static/nations/ru.svg";
@@ -44,5 +45,6 @@ export const Nation = {
   "ro": RO,
   "hi": HI,
   "uk": UK,
-  "ar": AR
+  "ar": AR,
+  "ms": MS
 };

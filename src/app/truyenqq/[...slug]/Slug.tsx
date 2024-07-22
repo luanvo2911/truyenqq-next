@@ -58,6 +58,7 @@ export default function Slug({ params }: { params: { slug: string[] } }) {
         <div className="flex items-center justify-center">
           <div className="w-auto h-[250px] aspect-[7/10]">
             <Image
+              unoptimized
               className="object-cover object-center w-full h-full rounded-lg shadow-xl"
               src={getCoverArt(mangaResponse)}
               width={640}
@@ -193,6 +194,7 @@ export default function Slug({ params }: { params: { slug: string[] } }) {
                     </div>
                     <div>
                       <Image
+                        unoptimized
                         width={20}
                         height={20}
                         src={_.get(

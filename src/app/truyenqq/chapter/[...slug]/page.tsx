@@ -1,14 +1,14 @@
 "use client";
 import useChapterStore from "@/src/store/chapter";
-import { useEffect } from "react";
+import { getDateString } from "@/src/utils/dateFns";
 import { getChapterArt } from "@/src/utils/getChapterImage";
+import { faInfoCircle } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Breadcrumb } from "antd";
+import _ from "lodash";
 import Image from "next/image";
 import Link from "next/link";
-import _ from "lodash";
-import { Breadcrumb } from "antd";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faInfoCircle } from "@fortawesome/free-solid-svg-icons";
-import { getDateString } from "@/src/utils/dateFns";
+import { useEffect } from "react";
 
 export default function Page({ params }: { params: { slug: string } }) {
   const { chapter, setChapter, chapterInfo, setChapterInfo } =
@@ -106,6 +106,7 @@ export default function Page({ params }: { params: { slug: string } }) {
             {getChapterArt(chapter)?.map((url: string, index: number) => {
               return (
                 <Image
+                  unoptimized
                   key={index}
                   src={url}
                   alt={`image of chapter`}

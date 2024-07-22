@@ -3,11 +3,10 @@ import useIsMobile from "@/src/hooks/useIsMobile";
 import getDateFns from "@/src/utils/dateFns";
 import getCoverArt from "@/src/utils/getCoverImage";
 import reduceText from "@/src/utils/reduceText";
+import { Tag } from "antd";
 import _ from "lodash";
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect } from "react";
-import { Tag } from "antd";
 
 export const MangaSpotlight = ({ props }: { props: Manga }) => {
   const isMobile = useIsMobile();
@@ -25,6 +24,7 @@ export const MangaSpotlight = ({ props }: { props: Manga }) => {
     >
       <div className="w-[calc(100vw-1rem)] xl:w-[calc(100vw-20rem)] h-[calc(160px+2rem)] md:h-[calc(225px+4rem)] opacity-50 -translate-y-24">
         <Image
+          unoptimized
           className="w-full h-auto object-cover"
           src={getCoverArt(props)}
           alt="thumbnail"
@@ -37,6 +37,7 @@ export const MangaSpotlight = ({ props }: { props: Manga }) => {
         <div className=" flex gap-4 p-4 items-stretch">
           <div className="w-auto h-40 md:h-full aspect-[7/10]">
             <Image
+              unoptimized
               className="object-cover object-center w-full h-full"
               src={getCoverArt(props)}
               alt="thumbnail"
